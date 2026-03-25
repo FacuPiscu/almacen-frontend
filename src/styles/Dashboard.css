@@ -1,0 +1,184 @@
+.dashboard-page {
+  padding-bottom: 3rem;
+}
+
+.dashboard-header {
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.leading-tight {
+  margin-bottom: 0.25rem;
+}
+
+/* KPIs Grid Layout */
+.dashboard-kpis {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+.kpi-card {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  padding: 1.5rem;
+}
+
+.kpi-icon-wrapper {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.kpi-title {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-light);
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.kpi-value {
+  font-size: 1.75rem;
+  font-weight: 700;
+  line-height: 1;
+  margin-bottom: 0.35rem;
+}
+
+.kpi-desc {
+  font-size: 0.75rem;
+  color: var(--text-light);
+}
+
+/* Institutional Performance Panel */
+.dashboard-performance {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.performance-card {
+  padding: 2rem;
+  background: var(--surface-color);
+  border-left: 4px solid var(--primary-color);
+}
+
+.performance-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 1.5rem;
+}
+
+.performance-title-group {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.performance-icon {
+  width: 2.75rem;
+  height: 2.75rem;
+  background-color: var(--secondary-color);
+  color: var(--primary-color);
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.performance-title-group h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-color);
+  margin: 0;
+}
+
+.performance-status {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: var(--secondary-color);
+  padding: 0.5rem 1rem;
+  border-radius: 2rem;
+}
+
+.status-label {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--text-light);
+  text-transform: uppercase;
+}
+
+.status-value {
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.performance-intro {
+  font-size: 0.95rem;
+  color: var(--text-color);
+  font-weight: 400;
+  margin-bottom: 1.5rem;
+}
+
+.performance-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.performance-list li {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.performance-item-info {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-color);
+}
+
+.progress-bar-container {
+  width: 100%;
+  height: 0.65rem;
+  background-color: #f1f5f9;
+  border-radius: 9999px;
+  overflow: hidden;
+}
+
+.progress-bar {
+  height: 100%;
+  border-radius: 9999px;
+  transition: width 1s ease-out;
+}
+
+/* Colores de Utilidad para KPIs */
+.bg-blue-light { background-color: #eff6ff; }
+.text-blue { color: #2563eb; }
+.fill-blue { background-color: #2563eb; }
+
+.bg-green-light { background-color: #ecfdf5; }
+.text-green { color: #059669; }
+.fill-green { background-color: #059669; }
+
+.bg-orange-light { background-color: #fff7ed; }
+.text-orange { color: #ea580c; }
+.fill-orange { background-color: #ea580c; }

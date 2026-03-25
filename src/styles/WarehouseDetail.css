@@ -26,7 +26,7 @@
 }
 
 .current-warehouse {
-  font-weight: 700;
+  font-weight: 600;
   color: var(--text-color);
 }
 
@@ -58,7 +58,7 @@
 
 .hero-title {
   font-size: 1.875rem;
-  font-weight: 800;
+  font-weight: 600;
   color: var(--text-color);
   margin-bottom: 0.5rem;
 }
@@ -73,7 +73,7 @@
 .badge-primary {
   background-color: #ecfdf5;
   color: #047857;
-  font-weight: 700;
+  font-weight: 600;
   padding: 0.25rem 0.75rem;
   border-radius: 9999px;
   text-transform: uppercase;
@@ -92,7 +92,7 @@
 
 .tab-btn {
   padding: 0.5rem 1.5rem;
-  font-weight: 700;
+  font-weight: 600;
   font-size: 0.875rem;
   color: var(--text-light);
   border-radius: 0.75rem;
@@ -119,7 +119,7 @@
 
 .section-header h2 {
   font-size: 1.25rem;
-  font-weight: 700;
+  font-weight: 600;
   color: var(--text-color);
 }
 
@@ -244,6 +244,213 @@
   font-family: monospace;
   color: #047857;
   font-weight: 600;
+}
+
+/* Operations Grids */
+.operations-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.operation-card {
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+  text-align: center;
+  align-items: center;
+  gap: 1.5rem;
+  border-radius: 1rem;
+  transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+}
+
+.operation-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+
+.op-icon {
+  width: 5rem;
+  height: 5rem;
+  border-radius: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.op-info h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-color);
+  margin-bottom: 0.5rem;
+}
+
+.op-info p {
+  font-size: 0.95rem;
+  color: var(--text-light);
+}
+
+.btn-large {
+  width: 100%;
+  padding: 1rem;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.btn-blue {
+  background-color: #2563eb;
+  color: white;
+}
+
+.btn-blue:hover {
+  background-color: #1d4ed8;
+}
+
+.bg-blue {
+  background-color: #2563eb;
+}
+
+.btn-green {
+  background-color: #059669;
+  color: white;
+}
+
+.bg-green {
+  background-color: #059669;
+}
+
+.btn-green:hover {
+  background-color: #047857;
+}
+
+.btn-outline {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 0.8rem;
+  border: 2px dashed #94a3b8;
+  background: white;
+  color: #475569;
+  font-weight: 600;
+  border-radius: 0.75rem;
+  transition: all var(--transition-speed);
+}
+
+.btn-outline:hover {
+  border-color: #2563eb;
+  color: #2563eb;
+  background: #eff6ff;
+}
+
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mr-2 {
+  margin-right: 0.5rem;
+}
+
+.mb-2 {
+  margin-bottom: 0.5rem;
+}
+
+.mt-2 {
+  margin-top: 0.5rem;
+}
+
+.text-small {
+  font-size: 0.75rem;
+}
+
+/* Modal Overlay Styles */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: white;
+  width: 100%;
+  max-width: 500px;
+  border-radius: 1.25rem;
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+}
+
+.modal-header {
+  padding: 1.5rem 2rem;
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-header h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-color);
+  margin: 0;
+}
+
+.close-btn {
+  font-size: 1.5rem;
+  color: var(--text-light);
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.close-btn:hover {
+  color: var(--danger-color);
+}
+
+.modal-body {
+  padding: 2rem;
+}
+
+.modal-footer {
+  padding: 1.5rem 2rem;
+  border-top: 1px solid var(--border-color);
+  background: #f8fafc;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.camera-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 1rem;
+  background: #f1f5f9;
+  border: 2px dashed #cbd5e1;
+  border-radius: 0.75rem;
+  cursor: pointer;
+  transition: all var(--transition-speed);
+}
+
+.camera-placeholder:hover {
+  background: #e2e8f0;
+  border-color: #94a3b8;
+}
+
+.camera-placeholder span {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-light);
 }
 
 .item-name {

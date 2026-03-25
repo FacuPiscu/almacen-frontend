@@ -14,7 +14,7 @@
   --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
   --radius-md: 0.5rem;
   --radius-lg: 0.75rem;
-  --font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-family: 'Segoe UI', system-ui, -apple-system, Roboto, Helvetica, Arial, sans-serif;
   --transition-speed: 0.2s;
 }
 
@@ -130,7 +130,7 @@ button {
 
 .page-title {
   font-size: 1.5rem;
-  font-weight: 600;
+  font-weight: 500;
   margin-bottom: 1.5rem;
   color: var(--text-color);
 }

@@ -1,7 +1,7 @@
 
 import { Link } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
-import './Navbar.css';
+import '../../styles/Navbar.css';
 
 // Componente de navegación superior
 const Navbar = () => {
@@ -14,6 +14,7 @@ const Navbar = () => {
           Metrix Almacén
         </Link>
         <div className="navbar-links">
+          <Link to="/dashboard" className="nav-link">Dashboard</Link>
           <Link to="/warehouses" className="nav-link">Almacenes</Link>
           
           {user ? (

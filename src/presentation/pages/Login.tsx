@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
-import './Login.css';
+import '../../styles/Login.css';
 
 // Vista principal de inicio de sesión
 const Login = () => {
@@ -21,7 +21,7 @@ const Login = () => {
     
     try {
       await login({ email, password });
-      navigate('/warehouses', { replace: true });
+      navigate('/dashboard', { replace: true });
     } catch (err) {
       setError('Credenciales inválidas. Por favor, verifica tus datos.');
     } finally {

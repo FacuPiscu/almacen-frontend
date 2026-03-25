@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Warehouse } from '../../core/domain/types';
 import { warehouseRepository } from '../../infrastructure/repositories/MockWarehouseRepository';
-import './Pages.css';
+import '../../styles/Pages.css';
 
 // Vista que muestra la lista de todos los almacenes disponibles
 const Warehouses = () => {

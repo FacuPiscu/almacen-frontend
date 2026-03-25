@@ -6,9 +6,9 @@ import { useAuth } from '../hooks/useAuth';
 const AuthLayout = () => {
   const { user } = useAuth();
 
-  // Redirige a almacenes si el usuario ya está conectado
+  // Redirige a dashboard si el usuario ya está conectado
   if (user) {
-    return <Navigate to="/warehouses" replace />;
+    return <Navigate to="/dashboard" replace />;
   }
 
   return (

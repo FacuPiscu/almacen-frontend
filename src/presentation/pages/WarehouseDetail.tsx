@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { MapPin, Pencil, Trash } from 'lucide-react';
+import { MapPin, Pencil, Trash, Building2, PackagePlus, ArrowRightLeft, Camera, QrCode, ClipboardCheck } from 'lucide-react';
 import { Warehouse, Zone } from '../../core/domain/types';
 import { warehouseRepository } from '../../infrastructure/repositories/MockWarehouseRepository';
-import './Pages.css';
-import './WarehouseDetail.css';
+import '../../styles/Pages.css';
+import '../../styles/WarehouseDetail.css';
 
 interface Item {
   id: string;
@@ -32,19 +32,31 @@ const WarehouseDetail = () => {
   const [zones, setZones] = useState<Zone[]>([]);
   const [items, setItems] = useState<Item[]>([]);
   const [loading, setLoading] = useState(true);
-  const [activeTab, setActiveTab] = useState<'zones' | 'items' | 'categories'>('zones');
+  const [activeTab, setActiveTab] = useState<'zones' | 'items' | 'categories' | 'operations'>('zones');
+  
+  // Modals state
+  const [isReceptionModalOpen, setIsReceptionModalOpen] = useState(false);
+  const [isStoreModalOpen, setIsStoreModalOpen] = useState(false);
+  const [isProcessing, setIsProcessing] = useState(false);
 
   useEffect(() => {
     if (id) {
       warehouseRepository.getById(id).then((data) => {
         setWarehouse(data || null);
-        // Load mock data for the specific warehouse
         setZones(MOCK_ZONES);
         setItems(MOCK_ITEMS);
         setLoading(false);
       });
     }
   }, [id]);
+
+  const handleSimulateAction = (setter: React.Dispatch<React.SetStateAction<boolean>>) => {
+    setIsProcessing(true);
+    setTimeout(() => {
+      setIsProcessing(false);
+      setter(false);
+    }, 1500);
+  };
 
   if (loading) return <div className="page-wrapper"><div className="loading-state">Cargando detalles del almacén...</div></div>;
   if (!warehouse) return <div className="page-wrapper"><div className="error-state">Almacén no encontrado</div></div>;
@@ -61,7 +73,7 @@ const WarehouseDetail = () => {
 
       <div className="card warehouse-hero">
         <div className="hero-info">
-          <div className="hero-icon">🏢</div>
+          <div className="hero-icon"><Building2 size={40} style={{ color: '#047857' }} /></div>
           <div>
             <h1 className="hero-title">{warehouse.name}</h1>
             <div className="hero-meta">
@@ -90,6 +102,12 @@ const WarehouseDetail = () => {
           className={`tab-btn ${activeTab === 'categories' ? 'active' : ''}`}
         >
           Categorías
+        </button>
+        <button
+          onClick={() => setActiveTab('operations')}
+          className={`tab-btn ${activeTab === 'operations' ? 'active' : ''}`}
+        >
+          Operaciones (Ingreso)
         </button>
       </div>
 
@@ -178,7 +196,157 @@ const WarehouseDetail = () => {
             </div>
           </div>
         )}
+
+        {activeTab === 'operations' && (
+          <div className="operations-section animate-fade-in">
+            <div className="section-header">
+              <h2>Flujos de Ingreso Logístico</h2>
+            </div>
+            
+            <div className="operations-grid">
+              <div className="card operation-card">
+                <div className="op-icon bg-blue-light text-blue">
+                  <PackagePlus size={32} />
+                </div>
+                <div className="op-info">
+                  <h3>Nueva Recepción</h3>
+                  <p>Registra la llegada de nuevos bultos o embarques al almacén general.</p>
+                </div>
+                <button 
+                  className="btn btn-large btn-blue"
+                  onClick={() => setIsReceptionModalOpen(true)}
+                >
+                  Iniciar Recepción
+                </button>
+              </div>
+
+              <div className="card operation-card">
+                <div className="op-icon bg-green-light text-green">
+                  <ArrowRightLeft size={32} />
+                </div>
+                <div className="op-info">
+                  <h3>Almacenar Artículo</h3>
+                  <p>Asigna un artículo previamente recibido a una zona específica del almacén.</p>
+                </div>
+                <button 
+                  className="btn btn-large btn-green"
+                  onClick={() => setIsStoreModalOpen(true)}
+                >
+                  Asignar a Zona
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
+
+      {/* Modal: Nueva Recepción */}
+      {isReceptionModalOpen && (
+        <div className="modal-overlay">
+          <div className="modal-content animate-fade-in">
+            <div className="modal-header">
+              <h3>Registrar Nueva Recepción</h3>
+              <button className="close-btn" onClick={() => !isProcessing && setIsReceptionModalOpen(false)}>×</button>
+            </div>
+            <div className="modal-body">
+              <div className="form-group">
+                <label className="form-label">Cantidad Recibida (Unidades/Bultos)</label>
+                <input type="number" className="form-control" placeholder="Ej: 15" disabled={isProcessing} />
+              </div>
+              <div className="form-group">
+                <label className="form-label">Estado Físico del Embarque</label>
+                <select className="form-control" disabled={isProcessing}>
+                  <option>Seleccione estado...</option>
+                  <option>Óptimo (Sin daños visibles)</option>
+                  <option>Regular (Empaque defectuoso pero contenido intacto)</option>
+                  <option>Deficiente (Daños reportados)</option>
+                </select>
+              </div>
+              <div className="form-group">
+                <label className="form-label">Captura de Fotografía del Embarque</label>
+                <div className="camera-placeholder">
+                  <Camera size={48} className="text-light mb-2" />
+                  <span>Tocar para usar la cámara</span>
+                </div>
+              </div>
+            </div>
+            <div className="modal-footer">
+              <button 
+                className="btn btn-secondary mr-2" 
+                onClick={() => setIsReceptionModalOpen(false)}
+                disabled={isProcessing}
+              >
+                Cancelar
+              </button>
+              <button 
+                className="btn btn-primary bg-blue flex-center" 
+                onClick={() => handleSimulateAction(setIsReceptionModalOpen)}
+                disabled={isProcessing}
+              >
+                {isProcessing ? 'Procesando...' : <><ClipboardCheck size={18} className="mr-2" /> Confirmar Recepción</>}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Modal: Almacenar Artículo */}
+      {isStoreModalOpen && (
+        <div className="modal-overlay">
+          <div className="modal-content animate-fade-in">
+            <div className="modal-header">
+              <h3>Almacenar Artículo en Zona</h3>
+              <button className="close-btn" onClick={() => !isProcessing && setIsStoreModalOpen(false)}>×</button>
+            </div>
+            <div className="modal-body">
+              <div className="form-group">
+                <label className="form-label">Seleccionar Lote/Artículo Recibido</label>
+                <select className="form-control" disabled={isProcessing}>
+                  <option>Seleccione un artículo en espera...</option>
+                  <option>Lote-001 - Tornillo Mariposa (15x)</option>
+                  <option>Lote-002 - Cable HDMI (50x)</option>
+                </select>
+              </div>
+              <div className="form-group">
+                <label className="form-label">Asignar a Zona Destino</label>
+                <select className="form-control" disabled={isProcessing}>
+                  <option>Seleccione una zona de este almacén...</option>
+                  {zones.map((z) => (
+                    <option key={z.id} value={z.id}>{z.name}</option>
+                  ))}
+                </select>
+              </div>
+              
+              <div className="sku-generator">
+                <button className="btn btn-outline" disabled={isProcessing}>
+                  <QrCode size={20} className="mr-2" /> Generar Etiqueta / SKU
+                </button>
+                <p className="text-light text-small mt-2 text-center">
+                  Al hacer clic se generará un código único para impresión rápida.
+                </p>
+              </div>
+
+            </div>
+            <div className="modal-footer">
+              <button 
+                className="btn btn-secondary mr-2" 
+                onClick={() => setIsStoreModalOpen(false)}
+                disabled={isProcessing}
+              >
+                Cancelar
+              </button>
+              <button 
+                className="btn btn-primary bg-green flex-center" 
+                onClick={() => handleSimulateAction(setIsStoreModalOpen)}
+                disabled={isProcessing}
+              >
+                {isProcessing ? 'Procesando...' : <><ArrowRightLeft size={18} className="mr-2" /> Completar Almacenamiento</>}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
     </div>
   );
 };
